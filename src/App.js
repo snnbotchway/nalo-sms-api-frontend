@@ -50,12 +50,10 @@ export default function App() {
 	const [password, setPassword] = useState("");
 	const [type, setType] = useState(0);
 	const [dlr, setDlr] = useState(1);
-	const [source, setSource] = useState("snnbotchway");
+	const [source, setSource] = useState("");
 	const [destination, setDestination] = useState("");
 	const [message, setMessage] = useState("");
-	const [key, setKey] = useState(
-		")y3cw0hypxo6s559zmpz00gl8ku740(11vjlh6brxe!diexyndlc8qlusf0yhkoy",
-	);
+	const [key, setKey] = useState("");
 	const [response, setResponse] = useState("");
 	const [open, setOpen] = useState(false);
 
