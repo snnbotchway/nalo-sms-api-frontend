@@ -76,6 +76,7 @@ export default function App() {
 			})
 			.finally(() => {
 				setOpen(false);
+				window.scrollTo(0, 0);
 			});
 	};
 	return (
