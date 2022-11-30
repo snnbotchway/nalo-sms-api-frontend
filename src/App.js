@@ -2,7 +2,11 @@ import "./App.css";
 
 import * as React from "react";
 import { useState } from "react";
+
+// Import axios client
 import axios from "axios";
+
+// Import required MUI components
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -59,13 +63,18 @@ export default function App() {
 
 	const handleSubmit = (event) => {
 		event.preventDefault();
+
+		// Activate backdrop:
 		setOpen(true);
+
 		let url = "";
 		if (!key) {
 			url = `https://sms.nalosolutions.com/smsbackend/clientapi/Resl_Nalo/send-message/?username=${username}&password=${password}&type=${type}&dlr=${dlr}&source=${source}&destination=${destination}&message=${message}`;
 		} else {
 			url = `https://sms.nalosolutions.com/smsbackend/clientapi/Resl_Nalo/send-message/?key=${key}&type=${type}&dlr=${dlr}&source=${source}&destination=${destination}&message=${message}`;
 		}
+
+		// Send request and set response accordingly
 		axios
 			.get(url)
 			.then((response) => {
@@ -76,9 +85,10 @@ export default function App() {
 			})
 			.finally(() => {
 				setOpen(false);
-				window.scrollTo(0, 0);
+				window.scrollTo(0, 0); // Scroll to top so user sees the response alert
 			});
 	};
+
 	return (
 		<ThemeProvider theme={theme}>
 			<Container component="main" maxWidth="xs">
@@ -97,11 +107,13 @@ export default function App() {
 						Nalo SMS API Project
 					</Typography>
 					<Grid item xs={12} marginTop={2}>
+						{/* Check if response starts with 1701 and display success alert */}
 						{response && response.slice(0, 4) === "1701" && (
 							<Alert severity="success">
 								Message sent to {destination} successfully
 							</Alert>
 						)}
+						{/* Check if response does not start with 1701 and display error alert */}
 						{response && response.slice(0, 4) !== "1701" && (
 							<Alert severity="error">{response}</Alert>
 						)}
